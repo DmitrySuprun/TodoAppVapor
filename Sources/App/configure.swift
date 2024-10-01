@@ -13,4 +13,10 @@ app.databases.use(DatabaseConfigurationFactory.sqlite(.file("db.sqlite")), as: .
     app.migrations.add(CreateTodo())
     // register routes
     try routes(app)
+    
+    // Serves files from `Public/` directory
+    let fileMiddleware = FileMiddleware(
+        publicDirectory: app.directory.publicDirectory
+    )
+    app.middleware.use(fileMiddleware)
 }
